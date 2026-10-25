@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancement Exclusif | Compte à rebours</title>
+    
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Lancement de notre nouvelle innovation</h1>
+        <p>Le futur arrive dans quelques instants.</p>
+        <div class="timer" id="countdown">
+            <div class="timer-box"><span class="timer-val" id="days">00</span>Jours</div>
+            <div class="timer-box"><span class="timer-val" id="hours">00</span>Heures</div>
+            <div class="timer-box"><span class="timer-val" id="minutes">00</span>Min</div>
+            <div class="timer-box"><span class="timer-val" id="seconds">00</span>Sec</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="agenda">
+            <h2>Programme de la journée</h2>
+            <div class="agenda-item">
+                <time>09:00</time>
+                <div><strong>Ouverture des portes</strong><br>Accueil des partenaires et invités.</div>
+            </div>
+            <div class="agenda-item">
+                <time>11:00</time>
+                <div><strong>Keynote principale</strong><br>Dévoilement de notre produit phare.</div>
+            </div>
+            <div class="agenda-item">
+                <time>14:00</time>
+                <div><strong>Atelier technique</strong><br>Démonstration en direct et FAQ.</div>
+            </div>
+        </section>
+
+        <section class="subscribe">
+            <h2>Restez informé</h2>
+            <p>Inscrivez-vous pour recevoir les dernières actualités en avant-première.</p>
+            <form id="subForm">
+                <input type="email" placeholder="votre@email.com" required>
+                <br>
+                <button type="submit">S'inscrire</button>
+            </form>
+            <p id="msg" style="margin-top: 1rem; font-weight: bold;"></p>
+        </section>
+    </main>
+
+    <script>
+        // Set target date to 7 days from now
+        const targetDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        document.getElementById('subForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('msg').innerText = "Merci ! Vous êtes bien inscrit.";
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
